@@ -14,7 +14,8 @@ rl.on('line', (input) => {
     const code = codeStr.split(',').map(c => parseInt(c));
     let x = 0, y = 0, dir = 0;
     let paint = true;
-    let computer = new Computer(code.slice(),
+    let computer = new Computer(
+        code.slice(),
         () => onInput(`${x},${y}`),
         (val) => {
             if (paint) {
@@ -29,7 +30,9 @@ rl.on('line', (input) => {
                 [x, y] = move[dir](x, y);
                 paint = true;
             }
-        });
+        }
+    );
+    paintedGrid.set(`${x},${y}`, 1);
     computer.run();
     console.log(paintedGrid.size);
     printGrid(paintedGrid);
